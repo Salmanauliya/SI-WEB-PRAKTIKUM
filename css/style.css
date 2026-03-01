@@ -1,15 +1,47 @@
 /* ========== BASE STYLES ========== */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background-color: #f8f9fa;
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Efek hover pada card produk */
-.card:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+/* ========== PRODUK CARD ========== */
+.produk-card {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #fff;
+}
+.produk-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.15) !important;
+}
+
+/* Container gambar untuk memastikan gambar full tanpa potongan */
+.image-container {
+    background-color: #f8f8f8; /* latar netral */
+    padding: 15px; /* ruang di sekeliling gambar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #dc3545;
+}
+
+/* Gambar produk full, tidak terpotong, dengan skala proporsional */
+.product-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px; /* batasi tinggi agar card seragam */
+    object-fit: contain; /* gambar utuh, tidak terpotong */
+    transition: transform 0.5s ease;
+}
+.produk-card:hover .product-image {
+    transform: scale(1.03);
+}
+
+/* Card body dengan padding lega */
+.card-body {
+    padding: 1.5rem 1.25rem;
 }
 
 /* Style untuk badge kategori */
@@ -25,17 +57,30 @@ body {
     display: inline-block;
     border: 1px solid transparent;
 }
-
 .badge-category:hover {
     background-color: #ced4da;
     border-color: #adb5bd;
     cursor: pointer;
 }
 
-/* Menyesuaikan input group */
+/* Badge khusus di dalam hero */
+.badge-hero {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: #212529 !important;
+    border: none;
+    backdrop-filter: blur(2px);
+    font-weight: 600;
+}
+.badge-hero:hover {
+    background-color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Input group */
 .input-group .btn-primary {
     background-color: #dc3545;
     border: none;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 .input-group .btn-primary:hover {
     background-color: #bb2d3b;
@@ -48,19 +93,61 @@ body {
 
 /* Footer */
 footer {
-    margin-top: 2rem;
+    margin-top: 3rem;
+}
+
+/* ========== HERO SECTION DENGAN BACKGROUND HW.png ========== */
+.hero-section {
+    position: relative;
+    background: none;
+    overflow: hidden;
+    padding: 60px 0;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/HW.png'); /* Sesuaikan path */
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    z-index: 0;
+}
+
+.hero-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* overlay gelap */
+    z-index: 1;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section h2 {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 /* ========== TOMBOL MODE (BIRU) ========== */
 #btn-theme {
     border: none;
     background: transparent;
-    color: #0d6efd;         /* warna biru */
+    color: #0d6efd;
     font-weight: 500;
     transition: color 0.2s;
 }
 #btn-theme:hover {
-    color: #0a58ca;           /* biru lebih gelap saat hover */
+    color: #0a58ca;
     text-decoration: underline;
 }
 
@@ -74,14 +161,18 @@ footer {
     background-color: #000 !important;
 }
 
-.dark-mode .card {
+.dark-mode .produk-card {
     background-color: #2d2d2d;
     color: #fff;
-    border-color: #444;
+    border: 1px solid #444;
 }
 
-.dark-mode .card .text-primary {
+.dark-mode .produk-card .text-primary {
     color: #ff6b6b !important;
+}
+
+.dark-mode .image-container {
+    background-color: #3d3d3d;
 }
 
 .dark-mode .badge-category {
@@ -92,6 +183,14 @@ footer {
 
 .dark-mode .badge-category:hover {
     background-color: #444;
+}
+
+.dark-mode .badge-hero {
+    background-color: rgba(50, 50, 50, 0.9) !important;
+    color: #eee !important;
+}
+.dark-mode .badge-hero:hover {
+    background-color: rgba(70, 70, 70, 1) !important;
 }
 
 .dark-mode .btn-outline-secondary {
@@ -132,9 +231,8 @@ footer {
     background-color: #bb2d3b;
 }
 
-/* Tombol mode tetap biru meski di dark mode */
 .dark-mode #btn-theme {
-    color: #6ea8fe;           /* biru lebih terang untuk dark mode */
+    color: #6ea8fe;
 }
 .dark-mode #btn-theme:hover {
     color: #9ac7ff;

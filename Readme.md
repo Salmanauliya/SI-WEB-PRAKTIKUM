@@ -1,0 +1,11 @@
+Hot Wheels Toys - Katalog Interaktif
+Selamat datang di proyek Hot Wheels Toys, sebuah website katalog mainan Hot Wheels yang telah ditingkatkan dengan berbagai fitur interaktif menggunakan JavaScript murni. Proyek ini merupakan kelanjutan dari Tugas Akhir 1 dan bertujuan untuk menghidupkan tampilan statis menjadi lebih dinamis dan responsif terhadap pengguna.
+
+Fungsi JavaScript yang Ditambahkan
+Pada website ini, saya menambahkan beberapa fungsi utama untuk meningkatkan pengalaman pengguna. Pertama, tombol Beli pada setiap kartu produk kini dapat mengurangi stok secara langsung saat diklik. Ketika stok mencapai nol, tombol akan otomatis dinonaktifkan dan berubah teks menjadi "Habis", disertai dengan alert konfirmasi setiap kali pembelian berhasil dilakukan. Fitur ini menggunakan manipulasi DOM dan event listener untuk merespon aksi pengguna secara real-time.
+
+Kedua, terdapat tombol Dark Mode di navbar yang memungkinkan pengguna beralih antara tema gelap dan terang. Preferensi tema ini disimpan ke dalam localStorage, sehingga saat halaman dimuat ulang, tema yang dipilih sebelumnya akan tetap diterapkan. Tombol ini juga berubah ikon dan teksnya sesuai mode aktif, memberikan umpan balik visual yang jelas.
+
+Ketiga, fitur Wishlist menjadi andalan interaktivitas di sini. Setiap kartu produk dilengkapi tombol "Wishlist" berbentuk hati. Saat diklik, nama produk akan ditambahkan ke dalam sessionStorage dan jumlah item langsung diperbarui pada badge di ikon keranjang navbar. Jika badge tersebut diklik, akan muncul modal Bootstrap yang menampilkan daftar lengkap wishlist. Di dalam modal, setiap item dilengkapi tombol hapus sehingga pengguna dapat menghapus item tertentu dari wishlist, dan perubahan akan langsung tersimpan di sessionStorage serta badge ikut diperbarui. Fitur hapus ini merupakan nilai tambah (bonus) yang membuat pengelolaan wishlist lebih fleksibel.
+
+Semua kode JavaScript ditulis menggunakan let dan const, dipisahkan ke dalam file eksternal js/script.js agar struktur proyek rapi dan mudah dikelola. Dengan penambahan fungsi-fungsi ini, website tidak hanya menarik secara visual tetapi juga memberikan pengalaman interaktif yang nyata bagi pengunjung.
