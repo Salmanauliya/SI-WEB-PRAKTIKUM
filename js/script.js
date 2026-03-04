@@ -1,6 +1,6 @@
 /**
  * Tugas Akhir 2 - Praktikum Sistem Informasi Berbasis Web
- * Fitur: Wishlist (sessionStorage), Dark Mode (localStorage), Pengelolaan Stok
+ * Fitur: Wishlist (sessionStorage), Dark Mode (localStorage), Pengelolaan Stok, Ringkasan Produk
  * Dosen: Nur Fitria
  * Nama: M. Salman Auliya Alfarisi
  * NIM: 162023034
@@ -79,6 +79,29 @@ function removeFromWishlist(itemName) {
     renderWishlistModal();
 }
 
+// ================= UPDATE RINGKASAN (TOTAL PRODUK, STOK, KATEGORI) =================
+function updateSummary() {
+    // Total Points = jumlah produk
+    const totalProduk = document.querySelectorAll('.produk-card').length;
+    document.getElementById('total-produk').textContent = totalProduk;
+
+    // Sub Total = total stok
+    let totalStok = 0;
+    document.querySelectorAll('.stok-text').forEach(el => {
+        let stok = parseInt(el.innerText.replace('Stok: ', ''));
+        if (!isNaN(stok)) totalStok += stok;
+    });
+    document.getElementById('total-stok').textContent = totalStok;
+
+    // Kategori = jumlah kategori unik (berdasarkan data-category)
+    const kategoriSet = new Set();
+    document.querySelectorAll('.produk-card').forEach(card => {
+        const cat = card.dataset.category;
+        if (cat) kategoriSet.add(cat);
+    });
+    document.getElementById('total-kategori').textContent = kategoriSet.size;
+}
+
 // ================= EVENT LISTENER TOMBOL WISHLIST DI CARD =================
 function initWishlistButtons() {
     const wishlistBtns = document.querySelectorAll('.btn-wishlist');
@@ -116,6 +139,8 @@ function initBeliButtons() {
                     e.target.disabled = true;
                     e.target.innerHTML = "Habis";
                 }
+                // Perbarui ringkasan setelah stok berubah
+                updateSummary();
             } else {
                 alert("Stok Habis!");
                 e.target.disabled = true;
@@ -176,4 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initBeliButtons();
     initWishlistButtons();
     initModalRemove();
+
+    // Hitung dan tampilkan ringkasan awal
+    updateSummary();
 });

@@ -1,10 +1,18 @@
+<?php
+session_start();
+// Cek apakah user sudah login
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit;
+}
+$username = $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hot Wheels Toys | Katalog</title>
-
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -34,6 +42,13 @@
           <button class="nav-link" data-bs-toggle="modal" data-bs-target="#wishlistModal">
             <i class="bi bi-cart"></i> Wishlist <span id="wishlist-count" class="badge bg-danger">0</span>
           </button>
+        </li>
+        <!-- Tampilkan username dan logout jika login -->
+        <li class="nav-item">
+          <span class="nav-link text-light">Halo, <?= htmlspecialchars($username) ?></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="controller/logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a>
         </li>
         <!-- Tombol Dark Mode -->
         <li class="nav-item">
@@ -90,13 +105,39 @@
   </div>
 </section>
 
+<!-- ================= RINGKASAN PRODUK ================= -->
+<section class="py-3">
+  <div class="container">
+    <div class="row g-3 text-center">
+      <div class="col-md-4">
+        <div class="border rounded p-3 bg-light summary-card">
+          <h6 class="mb-1">Total Points</h6>
+          <span class="fs-4 fw-bold" id="total-produk">0</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="border rounded p-3 bg-light summary-card">
+          <h6 class="mb-1">Sub Total</h6>
+          <span class="fs-4 fw-bold" id="total-stok">0</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="border rounded p-3 bg-light summary-card">
+          <h6 class="mb-1">Kategori</h6>
+          <span class="fs-4 fw-bold" id="total-kategori">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= GRID PRODUK ================= -->
 <section class="py-5">
   <div class="container">
     <div class="row g-4 g-lg-5" id="container-barang">
-      <!-- Produk 1 -->
+      <!-- Produk 1 (JDM) -->
       <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-lg border-0 produk-card">
+        <div class="card h-100 shadow-lg border-0 produk-card" data-category="JDM">
           <div class="image-container">
             <img src="assets/1.png" class="card-img-top product-image" alt="Hot Wheels 1">
           </div>
@@ -111,9 +152,9 @@
           </div>
         </div>
       </div>
-      <!-- Produk 2 -->
+      <!-- Produk 2 (Muscle) -->
       <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-lg border-0 produk-card">
+        <div class="card h-100 shadow-lg border-0 produk-card" data-category="Muscle">
           <div class="image-container">
             <img src="assets/2.png" class="card-img-top product-image" alt="Hot Wheels 2">
           </div>
@@ -128,9 +169,9 @@
           </div>
         </div>
       </div>
-      <!-- Produk 3 -->
+      <!-- Produk 3 (Classic) -->
       <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-lg border-0 produk-card">
+        <div class="card h-100 shadow-lg border-0 produk-card" data-category="Classic">
           <div class="image-container">
             <img src="assets/3.png" class="card-img-top product-image" alt="Hot Wheels 3">
           </div>
@@ -145,9 +186,9 @@
           </div>
         </div>
       </div>
-      <!-- Produk 4 -->
+      <!-- Produk 4 (JDM) -->
       <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-lg border-0 produk-card">
+        <div class="card h-100 shadow-lg border-0 produk-card" data-category="JDM">
           <div class="image-container">
             <img src="assets/4.png" class="card-img-top product-image" alt="Hot Wheels 4">
           </div>
@@ -162,9 +203,9 @@
           </div>
         </div>
       </div>
-      <!-- Produk 5 -->
+      <!-- Produk 5 (JDM) -->
       <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-lg border-0 produk-card">
+        <div class="card h-100 shadow-lg border-0 produk-card" data-category="JDM">
           <div class="image-container">
             <img src="assets/5.png" class="card-img-top product-image" alt="Hot Wheels 5">
           </div>
@@ -208,7 +249,7 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- JavaScript Eksternal (Semua kode ada di sini) -->
+<!-- JavaScript Eksternal -->
 <script src="js/script.js"></script>
 </body>
 </html>

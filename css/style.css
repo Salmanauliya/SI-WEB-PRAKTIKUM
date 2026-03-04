@@ -151,6 +151,11 @@ footer {
     text-decoration: underline;
 }
 
+/* ========== RINGKASAN PRODUK ========== */
+.summary-card {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
 /* ========== DARK MODE STYLES ========== */
 .dark-mode {
     background-color: #1a1a1a;
@@ -236,4 +241,11 @@ footer {
 }
 .dark-mode #btn-theme:hover {
     color: #9ac7ff;
+}
+
+/* Ringkasan dalam dark mode */
+.dark-mode .summary-card {
+    background-color: #2d2d2d !important;
+    color: #fff;
+    border-color: #444;
 }
